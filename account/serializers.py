@@ -43,10 +43,13 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
     password2= serializers.CharField(max_length=68, min_length=6, write_only=True)
     type_user = serializers.ChoiceField(choices=USER_TYPE_CHOICES) 
+    full_name=serializers.CharField(max_length=255, read_only=True)
+    access_token=serializers.CharField(max_length=255, read_only=True)
+    refresh_token=serializers.CharField(max_length=255, read_only=True)
 
     class Meta:
         model=User
-        fields = ['email', 'first_name', 'last_name','type_user', 'password', 'password2']
+        fields = ['email', 'first_name', 'last_name','type_user', 'password', 'password2','access_token','refresh_token','full_name']
 
     def validate(self, attrs):
         password=attrs.get('password', '')

@@ -8,6 +8,7 @@ from .serializers import PasswordResetRequestSerializer,LogoutUserSerializer, Su
 from rest_framework import status
 from .utils import send_generated_otp_to_email
 from django.utils.http import urlsafe_base64_decode
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.utils.encoding import smart_str, DjangoUnicodeDecodeError
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -34,15 +35,19 @@ class RegisterView(GenericAPIView):
         user = request.data
         serializer=self.serializer_class(data=user)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            user_instance = serializer.save()
+            refresh = RefreshToken.for_user(user_instance)
             user_data=serializer.data
             send_generated_otp_to_email(user_data['email'], request)
             return Response({
                 'data':user_data,
+                'access_token': str(refresh.access_token),
+                'refresh_token': str(refresh),
                 'message':'thanks for signing up a passcode has be sent to verify your email'
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+            
 class VerifyUserEmail(GenericAPIView):
     serializer_class = VerifyUserEmailSerializer  
 
