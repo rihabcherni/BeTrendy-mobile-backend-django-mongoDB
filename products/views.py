@@ -2,8 +2,8 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from products.models import Category, Post, Product, ProductVariant, Review, SubCategory, Wishlist
-from .serializers import  CategorySerializer, PostSerializer, ProductSerializer, ProductVariantSerializer, ReviewSerializer, SubCategorySerializer, WishlistSerializer
+from products.models import Category, Post, Product, ProductImages, ProductVariant, Review, SubCategory, Wishlist
+from .serializers import  CategorySerializer, PostSerializer, ProductImagesSerializer, ProductSerializer, ProductVariantSerializer, ReviewSerializer, SubCategorySerializer, WishlistSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 
@@ -43,6 +43,17 @@ class ProductVariantListCreateView(generics.ListCreateAPIView):
 class ProductVariantRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProductVariant.objects.all()
     serializer_class = ProductVariantSerializer
+
+
+class ProductImagesListCreateView(generics.ListCreateAPIView):
+    queryset = ProductImages.objects.all()
+    serializer_class = ProductImagesSerializer
+
+class ProductImagesRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ProductImages.objects.all()
+    serializer_class = ProductImagesSerializer
+
+
 
 class ReviewListCreateView(generics.ListCreateAPIView):
     queryset = Review.objects.all()

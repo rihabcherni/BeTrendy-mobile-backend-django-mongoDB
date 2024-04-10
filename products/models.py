@@ -46,7 +46,7 @@ class ProductVariant(models.Model):
         return f"{self.product.name} - Color: {self.color}, Size: {self.size}, Stock: {self.stock}"
 
 class ProductImages(models.Model):
-    product = models.ForeignKey(ProductVariant, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='images')
     image = models.ImageField(upload_to='assets/product_images/')        
 
     def __str__(self):

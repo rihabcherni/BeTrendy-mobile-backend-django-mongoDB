@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from products.models import Category,Post, Product, ProductVariant, Review, SubCategory, Wishlist 
+from products.models import Category,Post, Product, ProductImages, ProductVariant, Review, SubCategory, Wishlist 
 from django.db.models import Sum
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -14,11 +14,10 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class ProductImagesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ProductVariant
+        model = ProductImages
         fields = '__all__'
 
 class ProductVariantSerializer(serializers.ModelSerializer):
-    image_product = ProductImagesSerializer(many=True, read_only=True)
     class Meta:
         model = ProductVariant
         fields = '__all__'
@@ -31,6 +30,7 @@ class ProductSerializer(serializers.ModelSerializer):
     total_reviews = serializers.SerializerMethodField()
     variants = ProductVariantSerializer(many=True, read_only=True)
     reviews = ReviewSerializer(many=True, read_only=True)
+    images = ProductImagesSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product

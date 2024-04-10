@@ -2,6 +2,8 @@ from django.urls import path
 from project import settings
 from django.conf.urls.static import static
 from .views import (
+    ProductImagesListCreateView,
+    ProductImagesRetrieveUpdateDestroyView,
     ProductVariantListCreateView,
     ProductVariantRetrieveUpdateDestroyView,
     SubCategoryListCreateView,
@@ -33,6 +35,9 @@ urlpatterns = [
 
     path('products-variants/', ProductVariantListCreateView.as_view(), name='product-variants-list-create'),
     path('products-variants/<int:pk>/', ProductVariantRetrieveUpdateDestroyView.as_view(), name='product-variants-retrieve-update-destroy'),
+
+    path('products-iamges/', ProductImagesListCreateView.as_view(), name='product-iamges-list-create'),
+    path('products-iamges/<int:pk>/', ProductImagesRetrieveUpdateDestroyView.as_view(), name='product-iamges-retrieve-update-destroy'),
 
     path('product/<str:category_name>/', get_products_by_category, name='products-by-category'),
     path('product/<str:category_name>/<str:subcategory_name>/', get_products_by_category, name='products-by-subcategory'),
