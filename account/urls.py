@@ -16,6 +16,8 @@ from .views import GoogleOauthSignInview
 
 urlpatterns = [
     path('google/', GoogleOauthSignInview.as_view(), name='google'),
+
+
     path('register/', RegisterView.as_view(), name='register'),
     path('verify-email/', VerifyUserEmail.as_view(), name='verify'),
     path('login/', LoginUserView.as_view(), name='login-user'),
@@ -34,6 +36,4 @@ urlpatterns = [
 
     path('subscribes/', SubscriberListCreateView.as_view(), name='subscribe-list-create'),
     path('subscribes/<int:pk>/', SubscriberRetrieveUpdateDestroyView.as_view(), name='subscribe-retrieve-update-destroy'),
-
-
 ]
