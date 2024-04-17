@@ -3,9 +3,20 @@ from products.models import Category,Post, Product, ProductImages, ProductVarian
 from django.db.models import Sum
 
 class ReviewSerializer(serializers.ModelSerializer):
+    user_name = serializers.SerializerMethodField()
+    user_image = serializers.SerializerMethodField()
     class Meta:
         model = Review
         fields = '__all__'
+
+    def get_user_name(self, obj):
+        if obj.user:
+            return f"{obj.user.first_name} {obj.user.last_name}"
+        
+    def get_user_image(self, obj):
+        if obj.user and obj.user.photo:
+            return self.context['request'].build_absolute_uri(obj.user.photo.url)
+        return None
 
     def validate_rating(self, value):
         if value < 1 or value > 5:

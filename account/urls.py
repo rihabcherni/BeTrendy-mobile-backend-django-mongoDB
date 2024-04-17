@@ -1,5 +1,8 @@
 from unicodedata import name
 from django.urls import path
+from django.conf.urls.static import static
+
+from project import settings
 from .views import (
     SubscriberListCreateView,
     SubscriberRetrieveUpdateDestroyView,
@@ -37,3 +40,6 @@ urlpatterns = [
     path('subscribes/', SubscriberListCreateView.as_view(), name='subscribe-list-create'),
     path('subscribes/<int:pk>/', SubscriberRetrieveUpdateDestroyView.as_view(), name='subscribe-retrieve-update-destroy'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT)
