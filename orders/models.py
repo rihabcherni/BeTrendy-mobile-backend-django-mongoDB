@@ -3,7 +3,6 @@ from decimal import Decimal
 from account.models import User
 from products.models import ProductVariant
 from project.constant import STATUS_CHOICES
-from django.utils import timezone
 
 # Create your models here.
 

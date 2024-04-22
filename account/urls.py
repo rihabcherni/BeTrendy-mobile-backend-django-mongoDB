@@ -4,10 +4,15 @@ from django.conf.urls.static import static
 
 from project import settings
 from .views import (
+    ClientListView,
+    CreateClientView,
+    CreateSellerView,
+    SellerListView,
     SubscriberListCreateView,
     SubscriberRetrieveUpdateDestroyView,
         RegisterView,
         UpdateUserProfileView,
+    UserDetailView,
         UserProfileView, 
         VerifyUserEmail,
         LoginUserView, 
@@ -18,6 +23,12 @@ from rest_framework_simplejwt.views import (TokenRefreshView,)
 from .views import GoogleOauthSignInview
 
 urlpatterns = [
+    path('sellers/', SellerListView.as_view(), name='seller-list'),
+    path('clients/', ClientListView.as_view(), name='client-list'),
+    path('user/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
+    path('create-seller/', CreateSellerView.as_view(), name='create_seller'),
+    path('create-client/', CreateClientView.as_view(), name='create_client'),
+
     path('google/', GoogleOauthSignInview.as_view(), name='google'),
 
 

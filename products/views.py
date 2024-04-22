@@ -74,7 +74,7 @@ class PostRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 def get_products_by_category(request, category_name, subcategory_name=None):
     subcategory = get_object_or_404(SubCategory, name=subcategory_name, category__name=category_name) if subcategory_name else None
     products = Product.objects.filter(subcategory=subcategory) if subcategory else Product.objects.filter(subcategory__category__name=category_name)
-    serializer = ProductSerializer(products, many=True)
+    serializer = ProductSerializer(products, many=True, context={'request': request})
     return JsonResponse(serializer.data, safe=False)
 
 def get_subcategories_by_category(request, category_name):

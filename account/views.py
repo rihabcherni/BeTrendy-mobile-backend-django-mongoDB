@@ -15,7 +15,34 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from rest_framework.permissions import IsAuthenticated
 from .models import User
 from .serializers import GoogleSignInSerializer
-from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView, CreateAPIView
+from .serializers import UserSerializer
+
+class SellerListView(ListAPIView):
+    queryset = User.objects.filter(type_user='seller')
+    serializer_class = UserSerializer
+
+class ClientListView(ListAPIView):
+    queryset = User.objects.filter(type_user='client')
+    serializer_class = UserSerializer
+
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class CreateSellerView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
+    def perform_create(self, serializer):
+        serializer.save(type_user='seller', is_verified=True) 
+
+class CreateClientView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
+    def perform_create(self, serializer):
+        serializer.save(type_user='client', is_verified=True) 
 
 class GoogleOauthSignInview(GenericAPIView):
     serializer_class=GoogleSignInSerializer
@@ -72,7 +99,6 @@ class LoginUserView(GenericAPIView):
         serializer= self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 class PasswordResetRequestView(GenericAPIView):
     serializer_class=PasswordResetRequestSerializer
