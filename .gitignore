@@ -6,7 +6,6 @@ venv/
 env/
 
 # Ignore the Django media directory
-media/
 
 # Ignore the Django static files directory
 staticfiles/
