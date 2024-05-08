@@ -3,7 +3,6 @@ from django.db import models
 from account.models import User
 from products.models import Product
 
-# Create your models here.
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, through='CartItem')

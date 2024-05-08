@@ -11,10 +11,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
         return obj.calculate_subtotal()
     
 class OrderSerializer(serializers.ModelSerializer):
-    # total_price = serializers.SerializerMethodField()
     class Meta:
         model = Order
         fields = '__all__'
 
-    # def get_total_price(self, obj):
-    #     return obj.calculate_total_price()

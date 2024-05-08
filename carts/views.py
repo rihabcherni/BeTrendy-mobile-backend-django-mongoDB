@@ -5,7 +5,6 @@ from rest_framework import generics
 from carts.models import Cart, CartItem
 from carts.serializers import CartItemSerializer, CartSerializer
 
-# Create your views here.
 class CartListCreateView(generics.ListCreateAPIView):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer

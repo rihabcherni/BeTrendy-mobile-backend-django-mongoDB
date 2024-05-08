@@ -3,7 +3,6 @@ from account.models import User
 from orders.models import Order
 from project.constant import PAYMENT_MODE_CHOICES
 
-# Create your models here.
 class PaymentInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)

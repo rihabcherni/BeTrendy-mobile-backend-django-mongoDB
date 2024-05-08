@@ -7,7 +7,6 @@ from rest_framework import status
 
 from orders.models import Order, OrderItem
 from orders.serializers import OrderItemSerializer, OrderSerializer
-# Create your views here.
 class OrderListCreateView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer

@@ -4,7 +4,6 @@ from account.models import User
 from products.models import ProductVariant
 from project.constant import STATUS_CHOICES
 
-# Create your models here.
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -17,10 +16,6 @@ class Order(models.Model):
     def __str__(self):
         return f"Order {self.id} - {self.user.first_name}"
     
-    # def calculate_total_price(self):
-    #     total_price = self.items.aggregate(total_price=Sum(models.F('quantity') * models.F('price')))['total_price']
-    #     return total_price if total_price is not None else 0.0
-
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product_variant = models.ForeignKey(ProductVariant, on_delete=models.CASCADE, default="")
