@@ -6,6 +6,7 @@ from products.models import Category, Post, Product, ProductImages, ProductVaria
 from .serializers import  CategorySerializer, PostSerializer, ProductImagesSerializer, ProductSerializer, ProductVariantSerializer, ReviewSerializer, SubCategorySerializer, WishlistSerializer
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.response import Response
 
 def home(request):
     return HttpResponse("Welcome to the Shopee backend!")  
@@ -89,13 +90,9 @@ def get_subcategories_by_category(request, category_name):
     return JsonResponse(data, safe=False)
 
 
-
 class WishlistListCreateAPIView(generics.ListCreateAPIView):
     queryset = Wishlist.objects.all()
     serializer_class = WishlistSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
 
 class WishlistRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Wishlist.objects.all()
