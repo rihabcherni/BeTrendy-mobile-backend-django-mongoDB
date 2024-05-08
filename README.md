@@ -21,12 +21,15 @@ Be-Trendy is an e-commerce platform built with Ionic for the frontend mobile app
 To install and run the Be-Trendy Backend project locally, follow these steps:
 
 1. Clone the repository:
+
+   ```bash
    git clone https://github.com/rihabcherni/be-trendy-backend.git
+   ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd be-trendy-backend
+   cd ionic-backend
    ```
 
 3. Install Python dependencies:
@@ -48,21 +51,23 @@ To install and run the Be-Trendy Backend project locally, follow these steps:
 
    This command starts the Django development server, and you should be able to access the Be-Trendy Backend APIs at `http://localhost:8000` in your web browser.
 
-## Contributing
+   
+   Or specify the IP address and port to bind to using the following command:
+     ```bash
+      python manage.py runserver your_ipv4_address:8000
+     ```
+   Replace 'your_ipv4_address' with the IPv4 address of your PC. This will make the Django server accessible via the specified IP address and port.For example, if your PC's IPv4 address is 192.168.1.10, you would run:
 
-Contributions to the Be-Trendy Backend are welcome! If you'd like to contribute, please follow these steps:
+      ```bash
+      python manage.py runserver 192.168.1.10:8000
+      ```
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature-name`).
-3. Make your changes.
-4. Commit your changes (`git commit -am 'Add new feature'`).
-5. Push to the branch (`git push origin feature/your-feature-name`).
-6. Create a new pull request.
+   The Django server will now be accessible at `http://192.168.1.10:8000`.
 
-## License
+## Contributors
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- Rihab Cherni
+- Molka Elloumi
+- Wiem Hammemi
 
 ---
-
-Feel free to customize this README file further based on your project's specific requirements and features!
